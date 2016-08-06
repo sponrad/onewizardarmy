@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ProjectileScript : MonoBehaviour {
+public class l01ProjectileScript : MonoBehaviour {
 
 	public float speed;
 

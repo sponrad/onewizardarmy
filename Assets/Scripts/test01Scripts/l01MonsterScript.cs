@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MonsterScript : MonoBehaviour {
+public class l01MonsterScript : MonoBehaviour {
 
 	public float speed = 4.0f;
 
@@ -23,6 +23,6 @@ public class MonsterScript : MonoBehaviour {
 	}
 
 	public void OnDestroy(){
-		GameObject.Find ("Control").GetComponent<Level01Control> ().enemyList.Remove (gameObject);
+		GameObject.Find ("Control").GetComponent<l01Control> ().enemyList.Remove (gameObject);
 	}
 }

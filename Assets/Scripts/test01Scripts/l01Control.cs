@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Level01Control : MonoBehaviour {
+public class l01Control : MonoBehaviour {
 
 	public GameObject enemy;
 	public float updateTime;
@@ -12,7 +12,7 @@ public class Level01Control : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Invoke ("updateTick", 0f);
+		updateTick ();		
 	}
 	
 	// Update is called once per frame
@@ -30,16 +30,16 @@ public class Level01Control : MonoBehaviour {
 
 	void moveEnemies(){
 		foreach (GameObject enemy in enemyList) {
-			enemy.GetComponent<MonsterScript> ().updateTick ();
+			enemy.GetComponent<l01MonsterScript> ().updateTick ();
 		}
 	}
 
 	void spawnEnemies(){
 		//assumes top row is empty as it is called AFTER moveEnemies or at the beginning of the level
 		for (int i = 0; i < 5; i++) {
-			float xpos = -3f + (i * 1.5f);
+			float xpos = -2.6f + (i * 1.3f);
 			GameObject enemyInstance = (GameObject) Instantiate (enemy, new Vector3 (xpos, 7.5f, 0f), Quaternion.identity);
-			enemyInstance.GetComponent<MonsterScript> ().target = new Vector3 (xpos, 6f, 0f);
+			enemyInstance.GetComponent<l01MonsterScript> ().target = new Vector3 (xpos, 6f, 0f);
 			enemyList.Add (enemyInstance);
 		}
 	}
