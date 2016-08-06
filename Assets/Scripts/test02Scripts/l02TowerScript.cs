@@ -9,6 +9,8 @@ public class l02TowerScript : MonoBehaviour {
 	public int coolingDown = 0;
 	public int cooldown = 4;
 	public bool entireRow = false;
+	public enum Type {lightning, water, ice, normal, fire};
+	public Type type;
 	public int[] fireOptions = new int[] {0, 1, 1, 1, 1, 1, 1, 1, 1, 5};
 
 	// Use this for initialization
@@ -51,6 +53,8 @@ public class l02TowerScript : MonoBehaviour {
 		for (int i = 0; i < towers.Length; i++) {
 			towers [i].GetComponent<l02TowerScript>().tick ();
 		}
+
+		Debug.Log (type);
 	}
 
 	void finishCooldown (){

@@ -4,12 +4,19 @@ using System.Collections;
 public class l02MonsterScript : MonoBehaviour {
 
 	public float speed = 4.0f;
-
 	public Vector3 target;
+	public string[] types;
+	public string type;
+	public Sprite[] typeSprites;
 
 	// Use this for initialization
 	void Start () {
 		target = transform.position;
+		int tempInt = Random.Range (0, types.Length);
+		type = types[tempInt];
+		GetComponent<SpriteRenderer> ().sprite = typeSprites [tempInt];
+
+		Debug.Log (type);
 	}
 	
 	// Update is called once per frame
