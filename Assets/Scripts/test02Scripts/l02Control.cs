@@ -34,8 +34,8 @@ public class l02Control : MonoBehaviour {
 		for (int j = 2; j > -1; j--) {
 			for (int i = 0; i < 5; i++) {
 				if (Random.value > 0.5) {
-					float xpos = -2.6f + (i * 1.3f);
-					float ypos = 6f - (1.5f * j);
+					float xpos = -2.44f + (i * 1.22f);
+					float ypos = 6.09f - (1.04f * j);
 					GameObject enemyInstance = (GameObject)Instantiate (enemy, new Vector3 (xpos, ypos, 0f), Quaternion.identity);
 					enemyList.Add (enemyInstance);
 				}
@@ -49,8 +49,8 @@ public class l02Control : MonoBehaviour {
 		//assumes top row is empty as it is called AFTER moveEnemies or at the beginning of the level
 		for (int i = 0; i < 5; i++) {
 			if (Random.value > 0.5) {
-				float xpos = -2.6f + (i * 1.3f);
-				GameObject enemyInstance = (GameObject)Instantiate (enemy, new Vector3 (xpos, 7.5f, 0f), Quaternion.identity);
+				float xpos = -2.44f + (i * 1.22f);
+				GameObject enemyInstance = (GameObject)Instantiate (enemy, new Vector3 (xpos, 7.13f, 0f), Quaternion.identity);
 				enemyList.Add (enemyInstance);
 			}
 		}

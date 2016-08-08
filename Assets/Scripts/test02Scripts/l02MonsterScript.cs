@@ -26,7 +26,7 @@ public class l02MonsterScript : MonoBehaviour {
 	}
 
 	public void updateTick(){
-		target = new Vector3 (target.x, target.y - 1.5f, target.z);
+		target = new Vector3 (target.x, target.y - 1.04f, target.z);
 	}
 
 	public void OnDestroy(){
