@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class l02Control : MonoBehaviour {
 
 	public GameObject enemy;
-	public Sprite[] enemySprites;
+	//public Sprite[] enemySprites;
 	public float updateTime;
 	public bool gameRunning = true;
 

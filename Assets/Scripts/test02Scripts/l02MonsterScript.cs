@@ -9,12 +9,22 @@ public class l02MonsterScript : MonoBehaviour {
 	public string type;
 	public Sprite[] typeSprites;
 
+	private SpriteRenderer sr;
+
 	// Use this for initialization
 	void Start () {
 		target = transform.position;
 		int tempInt = Random.Range (0, types.Length);
 		type = types[tempInt];
-		GetComponent<SpriteRenderer> ().sprite = typeSprites [tempInt];
+		sr = GetComponent<SpriteRenderer> ();
+		sr.sprite = typeSprites [tempInt];
+
+		Debug.Log (sr.bounds.extents.x);
+
+		if (sr.bounds.extents.x > 0.5f){
+			transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+		}
+
 
 		Debug.Log (type);
 	}

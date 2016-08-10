@@ -9,6 +9,7 @@ public class l02ProjectileScript : MonoBehaviour {
 
 	public bool splitOnMatch = false;
 	public bool explodeOnMatch = false;
+	public bool iceProjectile = false;
 
 	private bool preventDestroy = false;
 
@@ -36,6 +37,7 @@ public class l02ProjectileScript : MonoBehaviour {
 					Destroy (coll.gameObject);
 					Destroy (gameObject);
 				}
+
 			} else {
 				Destroy (coll.gameObject);
 				if (!preventDestroy) {
@@ -58,6 +60,12 @@ public class l02ProjectileScript : MonoBehaviour {
 		//create two projectiles of this same type behind it.. going diagonally
 		Instantiate(gameObject, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.Euler( new Vector3(0f, 0f, 45f)));
 		Instantiate(gameObject, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.Euler( new Vector3(0f, 0f, -45f)));
+	}
+
+	void iceExplode(){
+		Debug.Log("ICE");
+		transform.localScale = new Vector3(5f, 5f, 5f);
+		speed = 0f;
 	}
 
 	void destroy(){
