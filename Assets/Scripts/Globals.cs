@@ -7,8 +7,8 @@ public class Globals : MonoBehaviour
 	public static int gold = 0;
 	public static string levelScores;
 
-	public static string towersInPlay = "arrow1, arrow1, arrow1, arrow1, arrow1";
-	public static string towersOwned = "arrow1, arrow1, arrow1, arrow1, arrow1";
+	public static string[] towersInPlay = new string[] {"arrow01", "arrow01", "arrow01", "arrow01", "arrow01"};
+	public static string[] towersOwned = new string[] {"arrow01", "arrow01", "arrow01", "arrow01", "arrow01"};
 
 	void Awake()
 	{
