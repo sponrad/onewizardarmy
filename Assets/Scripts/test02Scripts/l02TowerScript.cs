@@ -47,7 +47,9 @@ public class l02TowerScript : MonoBehaviour {
 		gameObject.GetComponent<SpriteRenderer> ().color = Color.gray;
 		coolingDown = cooldown;
 
-		GameObject.Find ("Control").GetComponent<l02Control> ().spawnEnemyRow ();
+		//GameObject.Find ("Control").GetComponent<l02Control> ().spawnEnemyRow ();
+
+		GameObject.Find ("Control").BroadcastMessage ("spawnEnemyRow");
 
 		GameObject[] towers = GameObject.FindGameObjectsWithTag ("tower");
 		for (int i = 0; i < towers.Length; i++) {

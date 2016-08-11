@@ -40,6 +40,6 @@ public class l02MonsterScript : MonoBehaviour {
 	}
 
 	public void OnDestroy(){
-		GameObject.Find ("Control").GetComponent<l02Control> ().enemyList.Remove (gameObject);
+		//GameObject.Find ("Control").GetComponent<l02Control> ().enemyList.Remove (gameObject);
 	}
 }

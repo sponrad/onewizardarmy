@@ -10,6 +10,26 @@ public class Globals : MonoBehaviour
 	public static string[] towersInPlay = new string[] {"arrow01", "arrow01", "arrow01", "arrow01", "arrow01"};
 	public static string[] towersOwned = new string[] {"arrow01", "arrow01", "arrow01", "arrow01", "arrow01"};
 
+
+	// *************   TOWER LOCATIONS IN LEVEL
+	public static float towerLeftXPos = -2.44f;
+	public static float towerRightXpos = 2.44f;
+	public static float towerLeftMidXPos = -1.22f;
+	public static float towerRightMidXPos = 1.22f;
+	public static float towerCenterXPos = 0f;
+	public static float towerBotRowYPos = -2.55f;
+	public static float towerMidRowYPos = -2.1f;
+	public static float towerTopRowYPos = -2.0f;
+
+
+	// *************   GRID LOCATIONS FOR ENEMIES
+	public static float gridStartX = -2.44f;
+	public static float gridStartY = 6.09f;  //is this the grid or the spawn spot...
+	public static float gridSpawnY = gridStartY + gridYSpacing;
+	public static float gridXSpacing = 1.22f;
+	public static float gridYSpacing = 1.04f;
+
+
 	void Awake()
 	{
 		if(GM != null)
