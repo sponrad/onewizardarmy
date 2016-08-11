@@ -1,28 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class world01Level01Control : MonoBehaviour {
 
 	private l02MonsterScript monsterScriptInstance;
 
 	public GameObject enemy;
+	public Text healthText;
+
+	public int health = 10;
 
 	// Use this for initialization
 	void Start () {
 		spawnEnemies ();
 		spawnEnemyRow ();
-
 		placeTowers ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
+		healthText.text = string.Empty.PadLeft(health, '❤');
 	}
 
 	void moveEnemies(){
 		foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy")) {
-			enemy.GetComponent<l02MonsterScript> ().updateTick ();
+			enemy.BroadcastMessage("updateTick");
 		}
 	}
 
@@ -57,5 +61,16 @@ public class world01Level01Control : MonoBehaviour {
 			Vector3 towerLoc = new Vector3 ( Globals.towerPositions[i][0], Globals.towerPositions[i][1], 0f);
 			Instantiate( Resources.Load ("Towers/" + Globals.towersInPlay[i]) , towerLoc, Quaternion.identity);
 		}
+	}
+
+	public void enemyHitTower(GameObject enemy){
+		health -= 1;
+		if (health == 0) {
+			//gameover
+			UnityEngine.SceneManagement.SceneManager.LoadScene ("title", UnityEngine.SceneManagement.LoadSceneMode.Single);
+			Time.timeScale = 1;
+		}
+
+		Destroy (enemy);
 	}
 }
