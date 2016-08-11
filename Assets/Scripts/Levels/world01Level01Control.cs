@@ -12,6 +12,8 @@ public class world01Level01Control : MonoBehaviour {
 	void Start () {
 		spawnEnemies ();
 		spawnEnemyRow ();
+
+		placeTowers ();
 	}
 	
 	// Update is called once per frame
@@ -46,6 +48,14 @@ public class world01Level01Control : MonoBehaviour {
 				float xpos = Globals.gridStartX + (i * Globals.gridXSpacing);
 				Instantiate (enemy, new Vector3 (xpos, Globals.gridSpawnY, 0f), Quaternion.identity);
 			}
+		}
+	}
+
+	public void placeTowers(){
+		for (int i = 0; i < 5; i++) {
+			Debug.Log (Globals.towersInPlay [i]);
+			Vector3 towerLoc = new Vector3 ( Globals.towerPositions[i][0], Globals.towerPositions[i][1], 0f);
+			Instantiate( Resources.Load ("Towers/" + Globals.towersInPlay[i]) , towerLoc, Quaternion.identity);
 		}
 	}
 }
