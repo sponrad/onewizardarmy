@@ -1,15 +1,22 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Globals : MonoBehaviour {
+public class Globals : MonoBehaviour 
+{
+	public static Globals GM;
+	public static bool sound = true;
+	public static int gold = 0;
+	public static string levelScores;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	public static string towersInPlay = "arrow1, arrow1, arrow1, arrow1, arrow1";
+	public static string towersOwned = "arrow1, arrow1, arrow1, arrow1, arrow1";
+
+	void Awake()
+	{
+		if(GM != null)
+			GameObject.Destroy(GM);
+		else
+			GM = this;
+		DontDestroyOnLoad(this);
+
 	}
 }
