@@ -36,7 +36,7 @@ public class world01Level01Control : MonoBehaviour {
 			for (int i = 0; i < 5; i++) {
 				if (Random.value > 0.5) {
 					float xpos = Globals.gridStartX + (i * Globals.gridXSpacing);
-					float ypos = Globals.gridSpawnY - (Globals.gridYSpacing * j);
+					float ypos = Globals.gridStartY - (Globals.gridYSpacing * j);
 					Instantiate (enemy, new Vector3 (xpos, ypos, 0f), Quaternion.identity);
 				}
 			}

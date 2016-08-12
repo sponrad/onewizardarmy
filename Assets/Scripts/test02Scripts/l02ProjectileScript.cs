@@ -33,7 +33,7 @@ public class l02ProjectileScript : MonoBehaviour {
 				}
 
 				if (splitOnMatch) {
-					splitProjectile ();
+					splitProjectile (coll.gameObject.transform);
 					Destroy (coll.gameObject);
 					Destroy (gameObject);
 				}
@@ -56,10 +56,10 @@ public class l02ProjectileScript : MonoBehaviour {
 		Invoke ("destroy", .3f);
 	}
 
-	void splitProjectile(){
+	void splitProjectile(Transform target){
 		//create two projectiles of this same type behind it.. going diagonally
-		Instantiate(gameObject, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.Euler( new Vector3(0f, 0f, 45f)));
-		Instantiate(gameObject, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.Euler( new Vector3(0f, 0f, -45f)));
+		Instantiate(gameObject, new Vector3(target.position.x, target.position.y, target.position.z), Quaternion.Euler( new Vector3(0f, 0f, 50f)));
+		Instantiate(gameObject, new Vector3(target.position.x, target.position.y, target.position.z), Quaternion.Euler( new Vector3(0f, 0f, -50f)));
 	}
 
 	void iceExplode(){
