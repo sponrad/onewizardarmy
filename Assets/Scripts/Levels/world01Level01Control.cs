@@ -8,7 +8,7 @@ public class world01Level01Control : MonoBehaviour {
 	private l02MonsterScript monsterScriptInstance;
 
 	public GameObject enemy;
-	public Text healthText;
+	public GameObject healthPrefab;
 
 	public int health = 10;
 
@@ -17,11 +17,11 @@ public class world01Level01Control : MonoBehaviour {
 		spawnEnemies ();
 		spawnEnemyRow ();
 		placeTowers ();
+		drawHealth ();
 	}
 
 	// Update is called once per frame
 	void Update () {
-		healthText.text = string.Empty.PadLeft(health, '❤');
 	}
 
 	void moveEnemies(){
@@ -72,5 +72,18 @@ public class world01Level01Control : MonoBehaviour {
 		}
 
 		Destroy (enemy);
+		drawHealth ();
+	}
+
+	public void drawHealth(){
+		foreach (GameObject health in GameObject.FindGameObjectsWithTag ("heart")) {
+			Destroy (health);
+		}
+
+		for (int i = 0; i < health; i++) {
+			float xpos = (i - 5) * 0.5f;
+			Instantiate (healthPrefab, new Vector3 (xpos, -4.5f, 0f), Quaternion.identity);
+		}
+
 	}
 }
