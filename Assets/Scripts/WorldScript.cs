@@ -13,6 +13,7 @@ public class WorldScript : MonoBehaviour {
 	public GameObject tower4Button;
 	public GameObject tower5Button;
 
+	public Text goldText;
 
 	// Use this for initialization
 	void Start () {
@@ -29,10 +30,10 @@ public class WorldScript : MonoBehaviour {
 		tower4Button.GetComponent<Image>().sprite = ownedTowers[3].GetComponent<SpriteRenderer>().sprite;
 		tower5Button.GetComponent<Image>().sprite = ownedTowers[4].GetComponent<SpriteRenderer>().sprite;
 
+		goldText.text = Globals.gold.ToString ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 }

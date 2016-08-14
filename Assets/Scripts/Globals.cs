@@ -4,7 +4,7 @@ public class Globals : MonoBehaviour
 {
 	public static Globals GM;
 	public static bool sound = true;
-	public static int gold = 0;
+	public static int gold = 50;
 	public static string levelScores;
 
 	public static string[] towersInPlay = new string[] {"arrow01", "arrow01", "arrow01", "arrow01", "arrow01"};
