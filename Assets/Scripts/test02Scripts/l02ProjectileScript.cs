@@ -4,7 +4,7 @@ using System.Collections;
 public class l02ProjectileScript : MonoBehaviour {
 
 	public float speed;
-	public enum Type {lightning, water, ice, normal, fire};
+	public enum Type {all, none, lightning, water, ice, normal, fire};
 	public Type type;
 
 	public bool splitOnMatch = false;
@@ -18,6 +18,7 @@ public class l02ProjectileScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Invoke ("Destroy", 10f);  //really horribly designed cleanup
 	}
 	
 	// Update is called once per frame
@@ -31,17 +32,13 @@ public class l02ProjectileScript : MonoBehaviour {
 			
 			if (stunDuration > 0) {
 				coll.gameObject.BroadcastMessage ("stunned", stunDuration);
+				Destroy (gameObject);
 			}
 
 			if (spreadTo.ToString() == coll.gameObject.GetComponent<l02MonsterScript> ().type.ToString ()) {
 				
 			}
-
-			if (destroyType.ToString() == coll.gameObject.GetComponent<l02MonsterScript> ().type.ToString ()) {
-				Destroy (coll.gameObject);
-				Destroy (gameObject);
-			}
-
+				
 			if (coll.gameObject.GetComponent<l02MonsterScript> ().type.ToString () == type.ToString ()) {
 				if (explodeOnMatch) {
 					explodeProjectile ();
@@ -54,14 +51,20 @@ public class l02ProjectileScript : MonoBehaviour {
 					Destroy (gameObject);
 				}
 
-			} else {
-				if (destroyType.ToString () == "") {
-					Destroy (coll.gameObject);
-					if (!preventDestroy) {
-						Destroy (gameObject);
-					}
+			}
+
+			if (destroyType.ToString() == coll.gameObject.GetComponent<l02MonsterScript> ().type.ToString ()) {
+				Destroy (coll.gameObject);
+				Destroy (gameObject);
+			}
+
+			if (destroyType.ToString () == "all") {
+				Destroy (coll.gameObject);
+				if (!preventDestroy) {
+					Destroy (gameObject);
 				}
 			}
+
 		}
 	}
 
