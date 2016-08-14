@@ -7,8 +7,8 @@ public class Globals : MonoBehaviour
 	public static int gold = 50;
 	public static string levelScores;
 
-	public static string[] towersInPlay = new string[] {"arrow01", "arrow01", "arrow01", "arrow01", "arrow01"};
-	public static string[] towersOwned = new string[] {"arrow01", "arrow01", "arrow01", "arrow01", "arrow01"};
+	public static string[] towersInPlay = new string[] {"arrow01", "arrow01", "lightning01", "arrow01", "arrow01"};
+	public static string[] towersOwned = new string[] {"arrow01", "arrow01", "arrow01", "arrow01", "arrow01", "lightning01"};
 
 
 	// *************   GRID LOCATIONS FOR ENEMIES

@@ -10,6 +10,7 @@ public class l02MonsterScript : MonoBehaviour {
 	public Sprite[] typeSprites;
 
 	private SpriteRenderer sr;
+	private int stunDuration;
 
 	// Use this for initialization
 	void Start () {
@@ -19,14 +20,9 @@ public class l02MonsterScript : MonoBehaviour {
 		sr = GetComponent<SpriteRenderer> ();
 		sr.sprite = typeSprites [tempInt];
 
-		Debug.Log (sr.bounds.extents.x);
-
 		if (sr.bounds.extents.x > 0.5f){
 			transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 		}
-
-
-		Debug.Log (type);
 	}
 	
 	// Update is called once per frame
@@ -37,9 +33,24 @@ public class l02MonsterScript : MonoBehaviour {
 
 	public void updateTick(){
 		target = new Vector3 (target.x, target.y - 1.04f, target.z);
+
+		if (stunDuration > 0) {
+			target = transform.position;
+			gameObject.GetComponent<SpriteRenderer> ().color = Color.yellow;
+			stunDuration -= 1;
+			if (stunDuration <= 0) {
+				gameObject.GetComponent<SpriteRenderer> ().color = Color.white;
+			}
+		}
 	}
 
 	public void OnDestroy(){
 		//GameObject.Find ("Control").GetComponent<l02Control> ().enemyList.Remove (gameObject);
+	}
+
+	void stunned(int stunTime){
+		Debug.Log ("stun called");
+		// add the stunTime this monsters stunduration
+		stunDuration += stunTime;
 	}
 }

@@ -10,6 +10,9 @@ public class l02ProjectileScript : MonoBehaviour {
 	public bool splitOnMatch = false;
 	public bool explodeOnMatch = false;
 	public bool iceProjectile = false;
+	public int stunDuration = 0;
+	public Type spreadTo;
+	public Type destroyType;
 
 	private bool preventDestroy = false;
 
@@ -25,6 +28,19 @@ public class l02ProjectileScript : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D coll){
 		if (coll.gameObject.tag == "enemy") {
+			
+			if (stunDuration > 0) {
+				coll.gameObject.BroadcastMessage ("stunned", stunDuration);
+			}
+
+			if (spreadTo.ToString() == coll.gameObject.GetComponent<l02MonsterScript> ().type.ToString ()) {
+				
+			}
+
+			if (destroyType.ToString() == coll.gameObject.GetComponent<l02MonsterScript> ().type.ToString ()) {
+				Destroy (coll.gameObject);
+				Destroy (gameObject);
+			}
 
 			if (coll.gameObject.GetComponent<l02MonsterScript> ().type.ToString () == type.ToString ()) {
 				if (explodeOnMatch) {
@@ -39,9 +55,11 @@ public class l02ProjectileScript : MonoBehaviour {
 				}
 
 			} else {
-				Destroy (coll.gameObject);
-				if (!preventDestroy) {
-					Destroy (gameObject);
+				if (destroyType.ToString () == "") {
+					Destroy (coll.gameObject);
+					if (!preventDestroy) {
+						Destroy (gameObject);
+					}
 				}
 			}
 		}
