@@ -10,6 +10,9 @@ public class Globals : MonoBehaviour
 	public static string[] towersInPlay = new string[] {"arrow01", "arrow01", "lightning01", "arrow01", "arrow01"};
 	public static string[] towersOwned = new string[] {"arrow01", "arrow01", "arrow01", "arrow01", "arrow01", "lightning01"};
 
+	public static string equippedConsumable = "WizardCandy";
+	public static string[] ownedConsumables = new string[] {"WizardCandy","WizardCandy","WizardCandy","WizardCandy"};
+
 
 	// *************   GRID LOCATIONS FOR ENEMIES
 	public static float gridStartX = -2.44f;
@@ -38,6 +41,8 @@ public class Globals : MonoBehaviour
 	};
 
 
+	// *************   POWER UP POSITIONS
+	public static float [] equippedConsumablePosition = new float[] {-1.3f, -3.5f};
 
 
 	void Awake()

@@ -17,6 +17,7 @@ public class world01Level01Control : MonoBehaviour {
 		spawnEnemies ();
 		spawnEnemyRow ();
 		placeTowers ();
+		placePowerUps ();
 		drawHealth ();
 	}
 
@@ -61,6 +62,11 @@ public class world01Level01Control : MonoBehaviour {
 			Vector3 towerLoc = new Vector3 ( Globals.towerPositions[i][0], Globals.towerPositions[i][1], 0f);
 			Instantiate( Resources.Load ("Towers/" + Globals.towersInPlay[i]) , towerLoc, Quaternion.identity);
 		}
+	}
+
+	public void placePowerUps(){
+		Vector3 consumableLoc = new Vector3 (Globals.equippedConsumablePosition [0], Globals.equippedConsumablePosition [1], 0f);
+		Instantiate (Resources.Load ("Items/" + Globals.equippedConsumable), consumableLoc, Quaternion.identity);
 	}
 
 	public void enemyHitTower(GameObject enemy){
