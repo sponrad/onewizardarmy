@@ -9,9 +9,14 @@ public class Globals : MonoBehaviour
 
 	public static string[] towersInPlay = new string[] {"arrow01", "arrow01", "lightning01", "arrow01", "arrow01"};
 	public static string[] towersOwned = new string[] {"arrow01", "arrow01", "arrow01", "arrow01", "arrow01", "lightning01"};
+	public static string[] towerInventory = new string[] {"arrow01", "fire01"};
 
 	public static string equippedConsumable = "WizardCandy";
 	public static string[] ownedConsumables = new string[] {"WizardCandy","WizardCandy","WizardCandy","WizardCandy"};
+
+	public static void getInventory(){
+		Debug.Log("called from globals!");
+	}
 
 
 	// *************   GRID LOCATIONS FOR ENEMIES
