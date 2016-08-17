@@ -22,6 +22,8 @@ public class WorldScript : MonoBehaviour {
 	public GameObject towerCustomize4Button;
 	public GameObject towerCustomize5Button;
 
+	public int selectedTower;
+
 	public Text goldText;
 
 	private GameObject[] towersInPlay = new GameObject[5];
@@ -29,12 +31,6 @@ public class WorldScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//get the owned towers into a gameobject
-		for (int i = 0; i < 5; i++) {
-			Debug.Log (Globals.towersInPlay [i]);
-			towersInPlay [i] = Resources.Load ("Towers/" + Globals.towersInPlay[i]) as GameObject;
-		}
-
 		updateTowers ();
 
 		goldText.text = Globals.gold.ToString ();
@@ -45,7 +41,13 @@ public class WorldScript : MonoBehaviour {
 	void Update () {
 	}
 
-	void updateTowers(){
+	public void updateTowers(){
+		//get the owned towers into a gameobject
+		for (int i = 0; i < 5; i++) {
+			Debug.Log (Globals.towersInPlay [i]);
+			towersInPlay [i] = Resources.Load ("Towers/" + Globals.towersInPlay[i]) as GameObject;
+		}
+
 		//place the tower sprites on the canvas object
 		tower1Button.GetComponent<Image>().sprite = towersInPlay[0].GetComponent<SpriteRenderer>().sprite;
 		tower2Button.GetComponent<Image>().sprite = towersInPlay[1].GetComponent<SpriteRenderer>().sprite;
@@ -66,6 +68,7 @@ public class WorldScript : MonoBehaviour {
 			
 		//instantiate a scrollviewtower in the scrollviewcontent area
 		//towerSelectScrollviewContent
+		Debug.Log("Inventory:");
 		for (int i = 0; i < Globals.towerInventory.Count (); i++) {
 			Debug.Log (Globals.towerInventory[i]);
 			float tempx = (i * 70f)+50f;
@@ -75,7 +78,10 @@ public class WorldScript : MonoBehaviour {
 
 			GameObject tempTower = Resources.Load ("Towers/" + Globals.towerInventory [i]) as GameObject;
 
-			scrollviewItem.GetComponent<Image> ().sprite = tempTower.GetComponent<SpriteRenderer> ().sprite;
+			//TODO: maybe show the name in text below the tower
+			scrollviewItem.GetComponent<Image> ().sprite = tempTower.GetComponent<SpriteRenderer> ().sprite; //shows the correct graphic
+			scrollviewItem.GetComponent<TowerButton> ().towerName = Globals.towerInventory [i];  //needed for switching towers later
+				
 		}
 
 	}

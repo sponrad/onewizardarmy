@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;	
 
 public class Globals : MonoBehaviour 
 {
@@ -7,12 +8,13 @@ public class Globals : MonoBehaviour
 	public static int gold = 50;
 	public static string levelScores;
 
-	public static string[] towersInPlay = new string[] {"arrow01", "arrow01", "lightning01", "arrow01", "arrow01"};
-	public static string[] towersOwned = new string[] {"arrow01", "arrow01", "arrow01", "arrow01", "arrow01", "lightning01"};
-	public static string[] towerInventory = new string[] {"arrow01", "fire01"};
+	public static List<string> towersInPlay = new List<string> {"arrow01", "arrow01", "lightning01", "arrow01", "arrow01"};
+	public static List<string> towersOwned = new List<string> {"arrow01", "arrow01", "arrow01", "arrow01", "arrow01", "lightning01"};
+	public static List<string> towerInventory = new List<string> {"arrow01", "fire01"};
 
 	public static string equippedConsumable = "WizardCandy";
-	public static string[] ownedConsumables = new string[] {"WizardCandy","WizardCandy","WizardCandy","WizardCandy"};
+	//public static string[] ownedConsumables = new string[] {"WizardCandy","WizardCandy","WizardCandy","WizardCandy"};
+	public static List<string> ownedConsumables = new List<string> {"WizardCandy","WizardCandy","WizardCandy","WizardCandy"};
 
 	public static void getInventory(){
 		Debug.Log("called from globals!");
