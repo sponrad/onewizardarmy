@@ -24,7 +24,7 @@ public class ClickLevelButton : MonoBehaviour {
 	void OnMouseDown(){
 		cv.GetComponent<Canvas> ().enabled = true;
 		playButton.GetComponent<ChangeScene> ().destinationScene = sceneToLoad;
-		levelText.text = "LEVEL " + sceneToLoad;
+		levelText.text = "LVL " + sceneToLoad.ToString();
 		levelInfoText.text = levelInfo;
 	}
 }
