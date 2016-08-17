@@ -68,7 +68,7 @@ public class WorldScript : MonoBehaviour {
 		//towerSelectScrollviewContent
 		for (int i = 0; i < Globals.towerInventory.Count (); i++) {
 			Debug.Log (Globals.towerInventory[i]);
-			float tempx = (i+1) * 60f;
+			float tempx = (i * 70f)+50f;
 			float tempy = (Mathf.FloorToInt(i/4)+1) * -60;
 			GameObject scrollviewItem = Instantiate (Resources.Load ("ScrollViewTower"), new Vector3 (tempx, tempy), Quaternion.identity) as GameObject;
 			scrollviewItem.transform.SetParent (towerSelectScrollviewContent.transform, false);
