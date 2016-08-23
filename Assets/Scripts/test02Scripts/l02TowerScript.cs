@@ -50,9 +50,8 @@ public class l02TowerScript : MonoBehaviour {
 		//TODO: do not spawn next row until all animations play
 		GameObject.Find ("Control").BroadcastMessage ("spawnEnemyRow");
 
-		GameObject[] towers = GameObject.FindGameObjectsWithTag ("tower");
-		for (int i = 0; i < towers.Length; i++) {
-			towers [i].BroadcastMessage("tick");
+		foreach (GameObject tower in GameObject.FindGameObjectsWithTag ("tower")) {
+			tower.BroadcastMessage ("tick");
 		}
 
 		Debug.Log (type);
