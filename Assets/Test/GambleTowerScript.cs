@@ -32,6 +32,10 @@ public class GambleTowerScript : MonoBehaviour {
 	void OnMouseDown(){
 		//if this tower is available... FIRE!!!!
 		if (coolingDown == 0) {
+
+			//make unable to fire twice, add gray cooldown color after firing
+			coolingDown = cooldown;
+
 			if (gambleTower){
 				gambleAndFire();   //function that will control the animation and determine an option based on fireoptions and sprites
 			}
@@ -39,6 +43,8 @@ public class GambleTowerScript : MonoBehaviour {
 				fireOption = 1;
 				fire ();  //change fire to be based on whatever the currently gambled option is
 			}
+
+			gameObject.GetComponent<SpriteRenderer> ().color = Color.gray;
 		}
 	}
 
@@ -54,10 +60,7 @@ public class GambleTowerScript : MonoBehaviour {
 				Instantiate (projectile, transform.position, Quaternion.identity);
 			}
 		}
-
-		gameObject.GetComponent<SpriteRenderer> ().color = Color.gray;
-		coolingDown = cooldown;
-
+			
 		//TODO: do not spawn next row until all animations play
 		//GameObject.Find ("Control").BroadcastMessage ("spawnEnemyRow");
 
