@@ -44,7 +44,6 @@ public class GambleTowerScript : MonoBehaviour {
 				fire ();  //change fire to be based on whatever the currently gambled option is
 			}
 
-			gameObject.GetComponent<SpriteRenderer> ().color = Color.gray;
 		}
 	}
 
@@ -60,6 +59,8 @@ public class GambleTowerScript : MonoBehaviour {
 				Instantiate (projectile, transform.position, Quaternion.identity);
 			}
 		}
+
+		gameObject.GetComponent<SpriteRenderer> ().color = Color.gray;
 			
 		//TODO: do not spawn next row until all animations play
 		//GameObject.Find ("Control").BroadcastMessage ("spawnEnemyRow");
