@@ -63,7 +63,7 @@ public class GambleTowerScript : MonoBehaviour {
 		gameObject.GetComponent<SpriteRenderer> ().color = Color.gray;
 			
 		//TODO: do not spawn next row until all animations play
-		//GameObject.Find ("Control").BroadcastMessage ("spawnEnemyRow");
+		GameObject.Find ("Control").BroadcastMessage ("spawnEnemyRow");
 
 		foreach (GameObject tower in GameObject.FindGameObjectsWithTag ("tower")) {
 			tower.BroadcastMessage ("tick");
