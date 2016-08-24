@@ -17,10 +17,11 @@ public class Globals : MonoBehaviour
 	//public static string[] ownedConsumables = new string[] {"WizardCandy","WizardCandy","WizardCandy","WizardCandy"};
 	public static List<string> ownedConsumables = new List<string> {"WizardCandy","WizardCandy","WizardCandy","WizardCandy"};
 
+	public enum towerGambleTypes {fire1, fire2, fire3, fire4, fire5, fire6, cooldown, powerup, misfire};
+
 	public static void getInventory(){
 		Debug.Log("called from globals!");
 	}
-
 
 	// *************   GRID LOCATIONS FOR ENEMIES
 	public static float gridStartX = -2.44f;

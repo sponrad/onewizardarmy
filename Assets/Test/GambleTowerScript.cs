@@ -12,6 +12,7 @@ public class GambleTowerScript : MonoBehaviour {
 	public bool entireRow = false;
 	public enum Type {lightning, water, ice, normal, fire};
 	public Type type;
+	public List<Globals.towerGambleTypes> towerFireOptions;
 	public int[] fireOptions = new int[] {0, 1, 1, 1, 1, 1, 1, 1, 1, 5};
 	public Sprite[] iconSprites;
 	public bool gambleTower = false;
@@ -41,7 +42,7 @@ public class GambleTowerScript : MonoBehaviour {
 			}
 			else{
 				fireOption = 1;
-				fire ();  //change fire to be based on whatever the currently gambled option is
+				fire ();
 			}
 
 		}
@@ -49,7 +50,24 @@ public class GambleTowerScript : MonoBehaviour {
 
 	void fire(){
 		//in this case fireOptions[] is always an integer so we are just spawning that many projectiles
-		Debug.Log(fireOption);
+		// find the fire option from towergambleoptions list, and do that!
+		switch (towerFireOptions [fireOption].ToString ()) {
+			case "fire1":
+				break;
+			case "fire2":
+				break;
+			case "fire3":
+				break;
+			case "powerup":
+				break;
+			case "coodown":
+				break;
+			case "misfire":
+				break;
+			default:
+				break;
+		}
+
 		for (int x = 0; x < fireOptions[fireOption]; x++) {
 			if (entireRow) {
 				for (float i = -2.6f; i < 3f; i += 1.3f) {
@@ -62,14 +80,12 @@ public class GambleTowerScript : MonoBehaviour {
 
 		gameObject.GetComponent<SpriteRenderer> ().color = Color.gray;
 			
-		//TODO: do not spawn next row until all animations play
+		//TODO: do not spawn next row until all animations play... Co-routine
 		GameObject.Find ("Control").BroadcastMessage ("spawnEnemyRow");
 
 		foreach (GameObject tower in GameObject.FindGameObjectsWithTag ("tower")) {
 			tower.BroadcastMessage ("tick");
 		}
-
-		Debug.Log (type);
 	}
 
 	void finishCooldown (){
