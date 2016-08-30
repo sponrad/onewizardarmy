@@ -13,7 +13,6 @@ public class GambleTowerScript : MonoBehaviour {
 	public enum Type {lightning, water, ice, normal, fire};
 	public Type type;
 	public List<Globals.towerGambleTypes> towerFireOptions;
-	public int[] fireOptions = new int[] {0, 1, 1, 1, 1, 1, 1, 1, 1, 5};
 	public Sprite[] iconSprites;
 	public bool gambleTower = false;
 
@@ -38,46 +37,39 @@ public class GambleTowerScript : MonoBehaviour {
 			coolingDown = cooldown;
 
 			if (gambleTower){
-				gambleAndFire();   //function that will control the animation and determine an option based on fireoptions and sprites
+				gambleAndActivateTower();   //function that will control the animation and determine an option based on fireoptions and sprites
 			}
 			else{
 				fireOption = 1;
-				fire ();
+				activateTower ();
 			}
 
 		}
 	}
 
-	void fire(){
+	void activateTower(){
 		//in this case fireOptions[] is always an integer so we are just spawning that many projectiles
 		// find the fire option from towergambleoptions list, and do that!
 		switch (towerFireOptions [fireOption].ToString ()) {
-			case "fire1":
-				break;
-			case "fire2":
-				break;
-			case "fire3":
-				break;
-			case "powerup":
-				break;
-			case "coodown":
-				break;
-			case "misfire":
-				break;
-			default:
-				break;
+		case "fire1":
+			fireProjectile (1);
+			break;
+		case "fire2":
+			fireProjectile (2);
+			break;
+		case "fire3":
+			fireProjectile (3);
+			break;
+		case "powerup":
+			break;
+		case "cooldown":
+			break;
+		case "misfire":
+			break;
+		default:
+			break;
 		}
-
-		for (int x = 0; x < fireOptions[fireOption]; x++) {
-			if (entireRow) {
-				for (float i = -2.6f; i < 3f; i += 1.3f) {
-					Instantiate (projectile, new Vector3 (i, transform.position.y, transform.position.z), Quaternion.identity);
-				}
-			} else {
-				Instantiate (projectile, transform.position, Quaternion.identity);
-			}
-		}
-
+			
 		gameObject.GetComponent<SpriteRenderer> ().color = Color.gray;
 			
 		//TODO: do not spawn next row until all animations play... Co-routine
@@ -92,7 +84,7 @@ public class GambleTowerScript : MonoBehaviour {
 		gameObject.GetComponent<SpriteRenderer> ().color = Color.white;
 	}
 
-	public void gambleAndFire(){
+	public void gambleAndActivateTower(){
 		//cycle through all of the images for a while
 		StartCoroutine(gambleSprites());
 	}
@@ -113,12 +105,12 @@ public class GambleTowerScript : MonoBehaviour {
 		List<Sprite> tempSprites = iconSprites.ToList();
 
 		//choose the final image
-		fireOption = Random.Range(0, fireOptions.Length);
+		fireOption = Random.Range(0, towerFireOptions.Count-1);
 		Debug.Log (fireOption);
 
 		//reorder the tempSprites so that the final one is at the end
 		//number of times to pop and move the sprites equals length minus the fireOption
-		int itemsToReorder = fireOptions.Length - fireOption;
+		int itemsToReorder = towerFireOptions.Count - 1 - fireOption;
 		while (itemsToReorder != 0) {
 			Sprite tempSprite = tempSprites [tempSprites.Count - 1];
 			tempSprites.RemoveAt (tempSprites.Count - 1);
@@ -137,6 +129,18 @@ public class GambleTowerScript : MonoBehaviour {
 		}
 
 		//sr.sprite = iconSprites [fireOption];
-		fire ();
+		activateTower ();
+	}
+
+	public void fireProjectile(int count){
+		for (int x = 0; x < count; x++) {
+			if (entireRow) {
+				for (float i = -2.6f; i < 3f; i += 1.3f) {
+					Instantiate (projectile, new Vector3 (i, transform.position.y, transform.position.z), Quaternion.identity);
+				}
+			} else {
+				Instantiate (projectile, transform.position, Quaternion.identity);
+			}
+		}
 	}
 }
