@@ -15,13 +15,16 @@ public class GambleTowerScript : MonoBehaviour {
 	public List<Globals.towerGambleTypes> towerFireOptions;
 	public Sprite[] iconSprites;
 	public bool gambleTower = false;
+	public bool columnAimed = false;
 
 	private int fireOption = 0;
 	private SpriteRenderer sr;
+	private Vector3 aimedFirePosition;
 
 	// Use this for initialization
 	void Start () {
 		sr = gameObject.GetComponent<SpriteRenderer> ();
+		aimedFirePosition = transform.position;
 	}
 
 	// Update is called once per frame
@@ -30,20 +33,42 @@ public class GambleTowerScript : MonoBehaviour {
 	}
 
 	void OnMouseDown(){
-		//if this tower is available... FIRE!!!!
 		if (coolingDown == 0) {
-
-			//make unable to fire twice, add gray cooldown color after firing
-			coolingDown = cooldown;
-
-			if (gambleTower){
-				gambleAndActivateTower();   //function that will control the animation and determine an option based on fireoptions and sprites
+			//tower is chosen, if columnaimed tower then bring up the column aimer
+			//else proceed to the nonaimed
+			if (columnAimed) {
+				activateColumnAimer ();
+				//towerActivateInit ();
+			} else {
+				towerActivateInit ();
 			}
-			else{
-				fireOption = 1;
-				activateTower ();
-			}
+		}
+	}
 
+	void activateColumnAimer(){
+		//provide callback to this gameObject?
+		GameObject.Find("Control").BroadcastMessage("showColumnAimer", gameObject);
+	}
+		
+	public void SetTargetAndFire(int column){
+		//column is 0 through 4
+		float xPos = 0f;
+		xPos = Globals.towerLeftXPos + (column * Globals.gridXSpacing);
+		aimedFirePosition = new Vector3 (xPos, transform.position.y, transform.position.z);
+
+		towerActivateInit ();
+	}
+
+	void towerActivateInit(){
+		//make unable to fire twice, add gray cooldown color after firing
+		coolingDown = cooldown;
+
+		if (gambleTower){
+			gambleAndActivateTower();   //function that will control the animation and determine an option based on fireoptions and sprites
+		}
+		else{
+			fireOption = 1;
+			activateTower ();
 		}
 	}
 
@@ -139,7 +164,7 @@ public class GambleTowerScript : MonoBehaviour {
 					Instantiate (projectile, new Vector3 (i, transform.position.y, transform.position.z), Quaternion.identity);
 				}
 			} else {
-				Instantiate (projectile, transform.position, Quaternion.identity);
+				Instantiate (projectile, aimedFirePosition, Quaternion.identity);
 			}
 		}
 	}

@@ -9,8 +9,14 @@ public class world01Level01Control : MonoBehaviour {
 
 	public GameObject enemy;
 	public GameObject healthPrefab;
+	public GameObject columnAimerObject;
+
+	private Canvas columnAimerCanvas;
 
 	public int health = 10;
+
+	private GameObject selectedTower;
+	private int selectedColumn;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +25,9 @@ public class world01Level01Control : MonoBehaviour {
 		placeTowers ();
 		placePowerUps ();
 		drawHealth ();
+
+		columnAimerCanvas = columnAimerObject.GetComponent<Canvas> ();
+		columnAimerCanvas.enabled = false;
 	}
 
 	// Update is called once per frame
@@ -91,5 +100,20 @@ public class world01Level01Control : MonoBehaviour {
 			Instantiate (healthPrefab, new Vector3 (xpos, -4.5f, 0f), Quaternion.identity);
 		}
 
+	}
+
+	public void showColumnAimer(GameObject selectedTowerObject){
+		columnAimerCanvas.enabled = true;
+		selectedTower = selectedTowerObject;
+	}
+
+	public void chooseColumn(int selectedColumn){
+		Debug.Log (selectedColumn);
+		selectedTower.BroadcastMessage ("SetTargetAndFire", selectedColumn);
+		hideColumnAimer ();
+	}
+
+	public void hideColumnAimer(){
+		columnAimerCanvas.enabled = false;
 	}
 }
