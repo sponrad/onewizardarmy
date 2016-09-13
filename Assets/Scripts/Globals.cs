@@ -8,9 +8,9 @@ public class Globals : MonoBehaviour
 	public static int gold = 50;
 	public static string levelScores;
 
-	public static List<string> towersInPlay = new List<string> {"empty", "empty", "arrow01", "empty", "empty"};
+	public static List<string> towersInPlay = new List<string> {"empty", "fire01", "arrow01", "fire01", "empty"};
 	//TODO: figure out if i need the owned list
-	public static List<string> towersOwned = new List<string> {"arrow01", "arrow01", "arrow01", "arrow01", "arrow01", "fire01", "lightning01"}; 
+	//public static List<string> towersOwned = new List<string> {"arrow01", "arrow01", "arrow01", "arrow01", "arrow01", "fire01", "lightning01"}; 
 	public static List<string> towerInventory = new List<string> {"lightning01", "fire01", "arrow01"};
 
 	public static string equippedConsumable = "WizardCandy";

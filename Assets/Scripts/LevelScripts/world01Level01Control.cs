@@ -41,8 +41,8 @@ public class world01Level01Control : MonoBehaviour {
 	}
 
 	void spawnEnemies(){
-		//assumes top row is empty as it is called AFTER moveEnemies or at the beginning of the level
-		for (int j = 2; j > -1; j--) {
+		//assumes empty screen as it is called AFTER moveEnemies or at the beginning of the level
+		for (int j = 3; j > -1; j--) {
 			for (int i = 0; i < 5; i++) {
 				if (Random.value > 0.5) {
 					float xpos = Globals.gridStartX + (i * Globals.gridXSpacing);
@@ -63,6 +63,30 @@ public class world01Level01Control : MonoBehaviour {
 				Instantiate (enemy, new Vector3 (xpos, Globals.gridSpawnY, 0f), Quaternion.identity);
 			}
 		}
+	}
+
+	public void towerFired(){
+		//check to see if all active towers are on cooldown...
+		bool cooldown = true;
+		foreach (GameObject tower in GameObject.FindGameObjectsWithTag ("tower")) {
+			if (tower.GetComponent<GambleTowerScript> ().coolingDown == 0) {
+				cooldown = false;
+			}
+		}
+
+		//if cooldown is still true (all towers are cooling down) move enemies down (freeze input temporarily)
+		if (cooldown == true) {
+			moveEnemies ();
+			moveEnemies ();
+			moveEnemies ();
+			moveEnemies ();
+			spawnEnemies ();
+
+			foreach (GameObject tower in GameObject.FindGameObjectsWithTag ("tower")) {
+				tower.BroadcastMessage ("tick");
+			}
+		}
+
 	}
 
 	public void placeTowers(){

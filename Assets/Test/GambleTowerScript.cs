@@ -97,12 +97,10 @@ public class GambleTowerScript : MonoBehaviour {
 			
 		gameObject.GetComponent<SpriteRenderer> ().color = Color.gray;
 			
-		//TODO: do not spawn next row until all animations play... Co-routine
-		GameObject.Find ("Control").BroadcastMessage ("spawnEnemyRow");
+		//TODO: do not tell control we have fired until all animations play... Co-routine?
+		//tell control that we have fired a tower... have it check for tower cooldowns and move enemies if needed
+		GameObject.Find("Control").BroadcastMessage("towerFired");
 
-		foreach (GameObject tower in GameObject.FindGameObjectsWithTag ("tower")) {
-			tower.BroadcastMessage ("tick");
-		}
 	}
 
 	void finishCooldown (){
