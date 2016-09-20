@@ -21,8 +21,8 @@ public class world01Level01Control : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//spawnEnemies ();
-		spawnEnemyRow ();
+		StartCoroutine ("spawnEnemies");
+		//spawnEnemyRow ();
 		placeTowers ();
 		placePowerUps ();
 		drawHealth ();
@@ -44,16 +44,10 @@ public class world01Level01Control : MonoBehaviour {
 		}
 	}
 
-	void spawnEnemies(){
-		//assumes empty screen as it is called AFTER moveEnemies or at the beginning of the level
-		for (int j = 3; j > -1; j--) {
-			for (int i = 0; i < 5; i++) {
-				if (Random.value > -1) {
-					float xpos = Globals.gridStartX + (i * Globals.gridXSpacing);
-					float ypos = Globals.gridStartY - (Globals.gridYSpacing * j);
-					Instantiate (enemy, new Vector3 (xpos, ypos, 0f), Quaternion.identity);
-				}
-			}
+	IEnumerator spawnEnemies(){
+		for (int i = 0; i < spawnEnemyCount; i++) {
+			spawnEnemyRow();
+			yield return new WaitForSeconds (0.1f);
 		}
 	}
 
