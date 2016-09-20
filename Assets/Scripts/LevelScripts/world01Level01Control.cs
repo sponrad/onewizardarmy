@@ -23,7 +23,6 @@ public class world01Level01Control : MonoBehaviour {
 	void Start () {
 		//spawnEnemies ();
 		spawnEnemyRow ();
-		spawnEnemyRow ();
 		placeTowers ();
 		placePowerUps ();
 		drawHealth ();
@@ -34,6 +33,9 @@ public class world01Level01Control : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyDown("s")){
+			spawnEnemyRow();
+		}
 	}
 
 	void moveEnemies(){

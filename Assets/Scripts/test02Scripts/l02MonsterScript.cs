@@ -36,22 +36,20 @@ public class l02MonsterScript : MonoBehaviour {
 	}
 
 	public void Fall(){
+		//this object falls down to the next available position
 		//find the farthest down location that is not occupied and set target to it
-		//Vector3 tempTarget = target;
+		//find the lowest value in the grid column
+		//set the target based on gridposition
 	}
 
 	public void Push(){
-		Debug.Log ("PUSH CALLED");
+		//pushes this object down one square, which impacts objects below
 		//set target to position below so object moves on down
-		Debug.Log(transform.position.y);
+		target = transform.position;
 		target = new Vector3 (transform.position.x, transform.position.y - Globals.gridYSpacing, transform.position.z);
-		Debug.Log (transform.position.y - Globals.gridYSpacing);
-		Debug.Log (target);
 
 		if (gridPosition [1] != 0) {
-			Debug.Log (gridPosition [1]);
 			gridPosition [1] -= 1;
-			Debug.Log (gridPosition [1]);
 
 			//check for what is at position below
 			if (Globals.grid[gridPosition[0], gridPosition[1]] != null){
@@ -74,9 +72,6 @@ public class l02MonsterScript : MonoBehaviour {
 			//if it is end of grid. take a life and destroy object
 			GameObject.Find ("Control").BroadcastMessage("enemyHitTower", gameObject);
 		}
-		Debug.Log (Globals.grid[2,6]);
-		Debug.Log (Globals.grid[2,5]);
-
 	}
 
 	public void SetGridPosition(int[] gridP){
