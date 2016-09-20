@@ -37,9 +37,18 @@ public class l02MonsterScript : MonoBehaviour {
 
 	public void Fall(){
 		//this object falls down to the next available position
-		//find the farthest down location that is not occupied and set target to it
+
 		//find the lowest value in the grid column
+		for (int j = gridPosition[1]; j >= 0; j--){
+			if (Globals.grid[gridPosition[0], j] == null){
+				Globals.grid[gridPosition[0], gridPosition[1]] = null;
+				gridPosition[1] = j;
+				Globals.grid[gridPosition[0], j] = gameObject;
+			}
+		}
+
 		//set the target based on gridposition
+		calculateTargetFromGrid();
 	}
 
 	public void Push(){
@@ -70,14 +79,18 @@ public class l02MonsterScript : MonoBehaviour {
 			GameObject.Find ("Control").BroadcastMessage("enemyHitTower", gameObject);
 		}
 
-		//wow....
-		//this retarded thing calculates the target position based on the grid position, from spawnY point
-		target = new Vector3 (transform.position.x, Globals.gridSpawnY - ((Globals.rows - gridPosition[1] - 1) * Globals.gridYSpacing), transform.position.z);
+		calculateTargetFromGrid ();
 
 	}
 
 	public void SetGridPosition(int[] gridP){
 		gridPosition = gridP;
+	}
+
+	public void calculateTargetFromGrid(){
+		//wow....
+		//this retarded thing calculates the target position based on the grid position, from spawnY point
+		target = new Vector3 (transform.position.x, Globals.gridSpawnY - ((Globals.rows - gridPosition[1] - 1) * Globals.gridYSpacing), transform.position.z);
 	}
 
 	public void updateTick(){
