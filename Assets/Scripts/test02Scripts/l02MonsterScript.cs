@@ -55,23 +55,24 @@ public class l02MonsterScript : MonoBehaviour {
 		//pushes this object down one square, which impacts objects below
 
 		if (gridPosition [1] != 0) {
-			gridPosition [1] -= 1;
 
 			//check for what is at position below
-			if (Globals.grid[gridPosition[0], gridPosition[1]] != null){
-				string objectBelowTag = Globals.grid[gridPosition[0], gridPosition[1]].tag;
+			if (Globals.grid[gridPosition[0], gridPosition[1]-1] != null){
+				string objectBelowTag = Globals.grid[gridPosition[0], gridPosition[1]-1 ].tag;
 
 				//if it is a bulwark destroy the bulwark
 				if (objectBelowTag == "bulwark") {
-					Destroy ( Globals.grid [gridPosition [0], gridPosition [1]] );
+					Destroy ( Globals.grid [gridPosition [0], gridPosition [1]-1 ] );
 				}
 
 				//if it is an enemy trigger push on that enemy
 				if (objectBelowTag == "enemy") {
 					Debug.Log ("ENEMY ON ENEMY");
-					Globals.grid [gridPosition [0], gridPosition [1]].BroadcastMessage ("Push");
+					Globals.grid [gridPosition [0], gridPosition [1]-1 ].BroadcastMessage ("Push");
 				}
 			}
+
+			gridPosition [1] -= 1;
 			//update grid for this item, previous entry should be taken care of by any preceding object or spawn at top
 			Globals.grid [gridPosition [0], gridPosition [1]] = gameObject;
 		} else {

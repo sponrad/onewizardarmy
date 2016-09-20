@@ -10,11 +10,13 @@ public class world01Level01Control : MonoBehaviour {
 	public GameObject enemy;
 	public GameObject healthPrefab;
 	public GameObject columnAimerObject;
+	public GameObject bulwark;
 
 	private Canvas columnAimerCanvas;
 
 	public int health = 10;
 	public int spawnEnemyCount;
+	public int bulwarkRows;
 
 	private GameObject selectedTower;
 	private int selectedColumn;
@@ -22,7 +24,7 @@ public class world01Level01Control : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		StartCoroutine ("spawnEnemies");
-		//spawnEnemyRow ();
+		placeBulwarks ();
 		placeTowers ();
 		placePowerUps ();
 		drawHealth ();
@@ -83,6 +85,15 @@ public class world01Level01Control : MonoBehaviour {
 
 			foreach (GameObject tower in GameObject.FindGameObjectsWithTag ("tower")) {
 				tower.BroadcastMessage ("tick");
+			}
+		}
+	}
+
+	public void placeBulwarks(){
+		for (int j = 0; j < bulwarkRows; j++) {
+			for (int i = 0; i < Globals.columns; i++){
+				Vector3 bulwarkLoc = new Vector3 (Globals.gridStartX + (i * Globals.gridXSpacing), Globals.gridYSpacing * j, 0);
+				Globals.grid[i,j] = Instantiate( bulwark, bulwarkLoc, Quaternion.identity) as GameObject;
 			}
 		}
 	}
