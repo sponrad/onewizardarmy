@@ -23,12 +23,18 @@ public class Globals : MonoBehaviour
 		Debug.Log("called from globals!");
 	}
 
+	public static int rows = 7;
+	public static int columns = 5;
+
+	// *************   GRID DATA STRUCTURE _____ GLOBAL VARIABLE _____
+	public static GameObject[,] grid = new GameObject[ columns, rows ];
+
 	// *************   GRID LOCATIONS FOR ENEMIES
 	public static float gridStartX = -2.44f;
 	public static float gridStartY = 6.09f;  //is this the grid or the spawn spot...
 	public static float gridXSpacing = 1.22f;
 	public static float gridYSpacing = 1.04f;
-	public static float gridSpawnY = Globals.gridStartY + Globals.gridYSpacing;
+	public static float gridSpawnY = Globals.gridStartY;
 
 
 	// *************   TOWER LOCATIONS IN LEVEL

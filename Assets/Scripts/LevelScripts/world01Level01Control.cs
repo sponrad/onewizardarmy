@@ -14,13 +14,15 @@ public class world01Level01Control : MonoBehaviour {
 	private Canvas columnAimerCanvas;
 
 	public int health = 10;
+	public int spawnEnemyCount;
 
 	private GameObject selectedTower;
 	private int selectedColumn;
 
 	// Use this for initialization
 	void Start () {
-		spawnEnemies ();
+		//spawnEnemies ();
+		spawnEnemyRow ();
 		spawnEnemyRow ();
 		placeTowers ();
 		placePowerUps ();
@@ -44,7 +46,7 @@ public class world01Level01Control : MonoBehaviour {
 		//assumes empty screen as it is called AFTER moveEnemies or at the beginning of the level
 		for (int j = 3; j > -1; j--) {
 			for (int i = 0; i < 5; i++) {
-				if (Random.value > 0.5) {
+				if (Random.value > -1) {
 					float xpos = Globals.gridStartX + (i * Globals.gridXSpacing);
 					float ypos = Globals.gridStartY - (Globals.gridYSpacing * j);
 					Instantiate (enemy, new Vector3 (xpos, ypos, 0f), Quaternion.identity);
@@ -54,13 +56,14 @@ public class world01Level01Control : MonoBehaviour {
 	}
 
 	public void spawnEnemyRow(){
-		moveEnemies ();
-
-		//assumes top row is empty as it is called AFTER moveEnemies or at the beginning of the level
 		for (int i = 0; i < 5; i++) {
-			if (Random.value > 0.5) {
+			if (Random.value > -1) {
 				float xpos = Globals.gridStartX + (i * Globals.gridXSpacing);
-				Instantiate (enemy, new Vector3 (xpos, Globals.gridSpawnY, 0f), Quaternion.identity);
+				if (Globals.grid[i, Globals.rows-1] != null) {
+					Globals.grid [i, Globals.rows-1].BroadcastMessage ("Push");
+				}
+				Globals.grid[i, Globals.rows-1] = Instantiate (enemy, new Vector3 (xpos, Globals.gridSpawnY, 0f), Quaternion.identity) as GameObject;
+				Globals.grid[i, Globals.rows-1].BroadcastMessage("SetGridPosition", new int[] {i, Globals.rows-1});
 			}
 		}
 	}
@@ -86,7 +89,6 @@ public class world01Level01Control : MonoBehaviour {
 				tower.BroadcastMessage ("tick");
 			}
 		}
-
 	}
 
 	public void placeTowers(){
