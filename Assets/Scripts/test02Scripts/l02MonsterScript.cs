@@ -44,9 +44,6 @@ public class l02MonsterScript : MonoBehaviour {
 
 	public void Push(){
 		//pushes this object down one square, which impacts objects below
-		//set target to position below so object moves on down
-		target = transform.position;
-		target = new Vector3 (transform.position.x, transform.position.y - Globals.gridYSpacing, transform.position.z);
 
 		if (gridPosition [1] != 0) {
 			gridPosition [1] -= 1;
@@ -72,6 +69,11 @@ public class l02MonsterScript : MonoBehaviour {
 			//if it is end of grid. take a life and destroy object
 			GameObject.Find ("Control").BroadcastMessage("enemyHitTower", gameObject);
 		}
+
+		//wow....
+		//this retarded thing calculates the target position based on the grid position, from spawnY point
+		target = new Vector3 (transform.position.x, Globals.gridSpawnY - ((Globals.rows - gridPosition[1] - 1) * Globals.gridYSpacing), transform.position.z);
+
 	}
 
 	public void SetGridPosition(int[] gridP){
