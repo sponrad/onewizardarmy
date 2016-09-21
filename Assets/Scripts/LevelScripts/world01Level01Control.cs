@@ -113,15 +113,15 @@ public class world01Level01Control : MonoBehaviour {
 	}
 
 	IEnumerator EnemiesFallDownCoroutine(){
-		//yield return new WaitForSeconds (0.25f);
+		//yield return new WaitForSeconds (0.5f);
 		Debug.Log("ENEMIES FALL DOWN COROUTINE TRIGGERED");
 		//trigger fall on each enemy, starting from bottom, need a delay between each probably, move to coroutine
 		for (int j = 0; j < Globals.rows; j++) {
 			for (int i = 0; i < Globals.columns; i++) {
-				if (Globals.grid [i, j] == null) {
-					Globals.grid [i, j+1].BroadcastMessage ("Fall", SendMessageOptions.DontRequireReceiver);
+				if (Globals.grid [i, j] != null) {
+					Globals.grid [i, j].BroadcastMessage ("Fall", SendMessageOptions.DontRequireReceiver);
 					Debug.Log (i.ToString() + ", " + j.ToString());
-					yield return new WaitForSeconds (0.02f);
+					yield return new WaitForSeconds (0.001f);
 				}
 			}
 		}
