@@ -49,7 +49,7 @@ public class world01Level01Control : MonoBehaviour {
 	IEnumerator spawnEnemies(){
 		for (int i = 0; i < spawnEnemyCount; i++) {
 			spawnEnemyRow();
-			yield return new WaitForSeconds (0.1f);
+			yield return new WaitForSeconds (0.5f);
 		}
 	}
 
