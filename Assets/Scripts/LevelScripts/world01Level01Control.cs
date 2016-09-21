@@ -21,6 +21,8 @@ public class world01Level01Control : MonoBehaviour {
 	private GameObject selectedTower;
 	private int selectedColumn;
 
+	public GameObject[,] publicGrid;
+
 	// Use this for initialization
 	void Start () {
 		StartCoroutine ("spawnEnemies");
@@ -38,6 +40,20 @@ public class world01Level01Control : MonoBehaviour {
 		if (Input.GetKeyDown("s")){
 			spawnEnemyRow();
 		}
+		if (Input.GetKeyDown("f")){
+			EnemiesFallDown ();
+		}
+		if (Input.GetKeyDown("g")){
+			Debug.Log ("**********   game grid   ***********");
+			for (int j = 0; j < Globals.rows; j++) {
+				for (int i = 0; i < Globals.columns; i++) {
+					if (Globals.grid [i, j] != null) {						
+						Debug.Log (i.ToString() + ", " + j.ToString() + ": " + Globals.grid [i, j].ToString ());
+					}
+				}
+			}
+		}
+
 	}
 
 	void moveEnemies(){
@@ -58,10 +74,6 @@ public class world01Level01Control : MonoBehaviour {
 			if (Random.value > -1) {
 				float xpos = Globals.gridStartX + (i * Globals.gridXSpacing);
 
-				/*if (Globals.grid[i, Globals.rows-1] != null) {
-					Globals.grid [i, Globals.rows-1].BroadcastMessage ("Push"); //TODO: race condition created here
-				}*/
-
 				//spawn into 8th row and then push down to visible 7th row
 				Globals.grid[i, Globals.rows-1] = Instantiate (enemy, new Vector3 (xpos, Globals.gridSpawnY, 0f), Quaternion.identity) as GameObject;
 				Globals.grid[i, Globals.rows-1].BroadcastMessage("SetGridPosition", new int[] {i, Globals.rows-1});
@@ -71,6 +83,8 @@ public class world01Level01Control : MonoBehaviour {
 	}
 
 	public void towerFired(){
+		//use this to start a check for end of player turn? need to reconcile all projectiles and animations
+
 		//check to see if all active towers are on cooldown...
 		bool cooldown = true;
 		foreach (GameObject tower in GameObject.FindGameObjectsWithTag ("tower")) {
@@ -81,14 +95,33 @@ public class world01Level01Control : MonoBehaviour {
 
 		//if cooldown is still true (all towers are cooling down) move enemies down (freeze input temporarily)
 		if (cooldown == true) {
-			moveEnemies ();
-			moveEnemies ();
-			moveEnemies ();
-			moveEnemies ();
-			spawnEnemies ();
+			Debug.Log ("all towers on cooldown");
 
 			foreach (GameObject tower in GameObject.FindGameObjectsWithTag ("tower")) {
 				tower.BroadcastMessage ("tick");
+			}
+
+			StartCoroutine ("spawnEnemies");
+		}
+
+		EnemiesFallDown ();
+	}
+
+	public void EnemiesFallDown(){
+		StartCoroutine ("EnemiesFallDownCoroutine");
+	}
+
+	IEnumerator EnemiesFallDownCoroutine(){
+		//yield return new WaitForSeconds (0.25f);
+		Debug.Log("ENEMIES FALL DOWN COROUTINE TRIGGERED");
+		//trigger fall on each enemy, starting from bottom, need a delay between each probably, move to coroutine
+		for (int j = 0; j < Globals.rows; j++) {
+			for (int i = 0; i < Globals.columns; i++) {
+				if (Globals.grid [i, j] != null) {
+					Globals.grid [i, j].BroadcastMessage ("Fall", SendMessageOptions.DontRequireReceiver);
+					Debug.Log (i.ToString() + ", " + j.ToString());
+					yield return new WaitForSeconds (0.1f);
+				}
 			}
 		}
 	}

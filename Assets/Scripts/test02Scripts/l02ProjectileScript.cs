@@ -18,7 +18,7 @@ public class l02ProjectileScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Invoke ("destroy", 10f);  //really horribly designed cleanup
+		Invoke ("destroy", 3f);  //really horribly designed cleanup
 	}
 	
 	// Update is called once per frame
@@ -65,6 +65,8 @@ public class l02ProjectileScript : MonoBehaviour {
 				}
 			}
 
+			//trigger Fall on all enemeis
+			GameObject.Find("Control").BroadcastMessage("EnemiesFallDown");
 		}
 	}
 
