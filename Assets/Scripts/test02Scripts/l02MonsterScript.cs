@@ -25,30 +25,27 @@ public class l02MonsterScript : MonoBehaviour {
 		if (sr.bounds.extents.x > 0.5f){
 			transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 		}
-
-		Fall ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		float step = speed * Time.deltaTime;
 		transform.position = Vector3.MoveTowards (transform.position, target, step);
+
+		calculateTargetFromGrid ();
 	}
 
 	public void Fall(){
 		//this object falls down to the next available position
 
 		//find the lowest value in the grid column
-		for (int j = gridPosition[1]; j >= 0; j--){
-			if (Globals.grid[gridPosition[0], j] == null){
-				Globals.grid[gridPosition[0], gridPosition[1]] = null;
-				gridPosition[1] = j;
-				Globals.grid[gridPosition[0], j] = gameObject;
-			}
+		int j = gridPosition[1];
+		while (Globals.grid [gridPosition [0], j] == null && j != 0) {
+			j--;
 		}
-
-		//set the target based on gridposition
-		calculateTargetFromGrid();
+		Globals.grid[gridPosition[0], gridPosition[1]] = null;
+		gridPosition[1] = j;
+		Globals.grid[gridPosition[0], j] = gameObject;
 	}
 
 	public void Push(){
@@ -72,16 +69,16 @@ public class l02MonsterScript : MonoBehaviour {
 				}
 			}
 
+			//update grid for this item
+			Globals.grid [gridPosition [0], gridPosition [1]] = null;
 			gridPosition [1] -= 1;
-			//update grid for this item, previous entry should be taken care of by any preceding object or spawn at top
 			Globals.grid [gridPosition [0], gridPosition [1]] = gameObject;
 		} else {
 			//if it is end of grid. take a life and destroy object
 			GameObject.Find ("Control").BroadcastMessage("enemyHitTower", gameObject);
 		}
 
-		calculateTargetFromGrid ();
-
+		Fall ();
 	}
 
 	public void SetGridPosition(int[] gridP){

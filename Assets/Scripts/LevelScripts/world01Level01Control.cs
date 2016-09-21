@@ -57,11 +57,15 @@ public class world01Level01Control : MonoBehaviour {
 		for (int i = 0; i < 5; i++) {
 			if (Random.value > -1) {
 				float xpos = Globals.gridStartX + (i * Globals.gridXSpacing);
-				if (Globals.grid[i, Globals.rows-1] != null) {
-					Globals.grid [i, Globals.rows-1].BroadcastMessage ("Push");
-				}
+
+				/*if (Globals.grid[i, Globals.rows-1] != null) {
+					Globals.grid [i, Globals.rows-1].BroadcastMessage ("Push"); //TODO: race condition created here
+				}*/
+
+				//spawn into 8th row and then push down to visible 7th row
 				Globals.grid[i, Globals.rows-1] = Instantiate (enemy, new Vector3 (xpos, Globals.gridSpawnY, 0f), Quaternion.identity) as GameObject;
 				Globals.grid[i, Globals.rows-1].BroadcastMessage("SetGridPosition", new int[] {i, Globals.rows-1});
+				Globals.grid[i, Globals.rows-1].BroadcastMessage("Push");
 			}
 		}
 	}

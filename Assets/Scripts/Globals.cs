@@ -23,7 +23,7 @@ public class Globals : MonoBehaviour
 		Debug.Log("called from globals!");
 	}
 
-	public static int rows = 7;
+	public static int rows = 8;  //top row is not visible
 	public static int columns = 5;
 
 	// *************   GRID DATA STRUCTURE _____ GLOBAL VARIABLE _____
@@ -34,7 +34,7 @@ public class Globals : MonoBehaviour
 	public static float gridStartY = 6.09f;  //is this the grid or the spawn spot...
 	public static float gridXSpacing = 1.22f;
 	public static float gridYSpacing = 1.04f;
-	public static float gridSpawnY = Globals.gridStartY;
+	public static float gridSpawnY = Globals.gridStartY + Globals.gridYSpacing;
 
 
 	// *************   TOWER LOCATIONS IN LEVEL
