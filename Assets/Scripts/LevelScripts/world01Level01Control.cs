@@ -64,6 +64,8 @@ public class world01Level01Control : MonoBehaviour {
 	}
 
 	IEnumerator spawnEnemies(){
+		yield return new WaitForSeconds (1.5f);
+	
 		for (int i = 0; i < spawnEnemyCount; i++) {
 			spawnEnemyRow();
 			yield return new WaitForSeconds (0.5f);
