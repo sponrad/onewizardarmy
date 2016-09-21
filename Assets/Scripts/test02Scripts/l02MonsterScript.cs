@@ -37,15 +37,23 @@ public class l02MonsterScript : MonoBehaviour {
 
 	public void Fall(){
 		//this object falls down to the next available position
-
+		Debug.Log("FALL CALLED!");
+		int j = gridPosition[1] - 1;
 		//find the lowest value in the grid column
-		int j = gridPosition[1];
+		for (; j >= 0; j--) {
+			if (Globals.grid [gridPosition [0], j] != null) {				
+				break;
+			}
+		}
+		/*int j = gridPosition[1]-1;
+		Debug.Log ("j= " + j.ToString());
 		while (Globals.grid [gridPosition [0], j] == null && j != 0) {
 			j--;
 		}
+		Debug.Log ("j= " + j.ToString());*/
 		Globals.grid[gridPosition[0], gridPosition[1]] = null;
-		gridPosition[1] = j;
-		Globals.grid[gridPosition[0], j] = gameObject;
+		gridPosition[1] = j+1;
+		Globals.grid[gridPosition[0], j+1] = gameObject;
 	}
 
 	public void Push(){

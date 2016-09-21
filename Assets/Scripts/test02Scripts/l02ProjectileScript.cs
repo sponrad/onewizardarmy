@@ -65,7 +65,7 @@ public class l02ProjectileScript : MonoBehaviour {
 				}
 			}
 
-			//trigger Fall on all enemeis
+			//trigger Fall on all enemeis, TODO: delay this until final projectile...
 			GameObject.Find("Control").BroadcastMessage("EnemiesFallDown");
 		}
 	}
